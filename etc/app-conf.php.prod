@@ -1,0 +1,20 @@
+<?php
+
+return [
+    'slimOptions' => [
+        'debug' => true,
+        'mode'  => 'development',
+    ],
+    'monolog' => [
+        'name'     => 'app',
+        'filepath' => __DIR__ . '/../logs/app.log'
+    ],
+    'dbConfig' => [
+        'type'     => 'mysql',
+        'host'     => 'localhost',
+        'name'     => 'schedule',
+        'user'     => 'root',
+        'password' => '',
+        'charset'  => 'utf8',
+    ]
+];
