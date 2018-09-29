@@ -17,8 +17,8 @@ class AppFactory
         // };
 
 
-        $token = '696268889:AAGMD4oB75zg6kLA9ym6lLCb4j3WQPkzaeM';
-        $bot = new \TelegramBot\Api\Client($token);
+
+        $bot = new \TelegramBot\Api\Client($config['telegram']['token']);
 
         $bot->command('start', function ($message) use ($bot) {
             $answer = 'Добро пожаловать!';
