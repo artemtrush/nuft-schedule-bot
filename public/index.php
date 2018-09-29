@@ -1,4 +1,8 @@
 <?php
+
+echo "TEST";
+
+/*
 ini_set('default_socket_timeout', 600);
 date_default_timezone_set('Europe/Kiev');
 
