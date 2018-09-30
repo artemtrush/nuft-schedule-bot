@@ -6,8 +6,8 @@ class Today extends Base
 {
     public function run($message)
     {
+        $answer = 'test';
 
-
-        return $this->action('Service\Card\Create')->run($data);
+        return $answer;
     }
 }

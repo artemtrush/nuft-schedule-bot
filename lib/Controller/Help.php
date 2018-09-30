@@ -6,8 +6,16 @@ class Help extends Base
 {
     public function run($message)
     {
-        $answer = 'test';
+        $text =
+            'А вот полный список моих команд:
+            /start - текст
+            /help  - текст
+            /today - текст
+            /start - текст
+            /start - текст
+            /start - текст'
+        ;
 
-        return $answer;
+        return $text;
     }
 }
