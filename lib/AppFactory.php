@@ -28,7 +28,7 @@ class AppFactory
 
             $bot->command($command, function ($message) use ($bot, $handler, $keyboard) {
                 $answer = $handler->run($message);
-                $bot->sendMessage($message->getChat()->getId(), $answer, null, false, null, $keyboard);
+                $bot->sendMessage($message->getChat()->getId(), $answer, 'markdown', false, null, $keyboard);
             });
         }
 
