@@ -34,7 +34,12 @@ class AppFactory
 
 
                 $answer = '1:';
-                $keyboard = new \TelegramBot\Api\Types\ReplyKeyboardMarkup(array(array("one", "two", "three")), true);
+                $keyboard = new \TelegramBot\Api\Types\ReplyKeyboardMarkup(
+                    array(
+                        array("/start", "/help"),
+                        array("one", "two", "three")
+                    )
+                );
                 $bot->sendMessage($message->getChat()->getId(), $answer, null, false, null, $keyboard);
 
                 $answer = '2:';
