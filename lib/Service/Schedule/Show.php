@@ -30,6 +30,8 @@ class Show extends \Service\Base
         $url = $this->config()['timetable']['url'];
 
         $response = $this->sendPostRequest($data, $url);
-        return iconv('Windows-1251', 'UTF-8', $response);
+        $this->log()->info( iconv('Windows-1251', 'UTF-8', $response) );
+
+        return 'good';
     }
 }
