@@ -12,7 +12,7 @@ class Help extends Base
             '/today - текст' . PHP_EOL .
             '/start - текст' . PHP_EOL .
             '/start - текст' . PHP_EOL .
-            '/start - текст'
+            '/start - \U+0037'
         ;
 
         return $text;
