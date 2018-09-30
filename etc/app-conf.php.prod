@@ -1,9 +1,8 @@
 <?php
 
 return [
-    'slimOptions' => [
-        'debug' => true,
-        'mode'  => 'development',
+    'telegram' => [
+        'token' => ''
     ],
     'monolog' => [
         'name'     => 'app',
