@@ -77,7 +77,7 @@ class Show extends \Service\Base
         $schedule = '';
 
         foreach ($data as $dayData) {
-            $schedule .= $dayData['day'] . ' ' . $dayData['date'] . PHP_EOL;
+            $schedule .= '**' . $dayData['day'] . ' ' . $dayData['date'] . '**' . PHP_EOL;
 
             foreach ($dayData['lessons'] as $lesson) {
                 $schedule .= $this->createEmoji('\x3' . $lesson['number'] . '\xE2\x83\xA3') . ' ' .
