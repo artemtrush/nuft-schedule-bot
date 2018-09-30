@@ -27,18 +27,7 @@ class AppFactory
             ]);
 
             $bot->command($command, function ($message) use ($bot, $handler, $keyboard) {
-                try {
-                    $answer = $handler->run($message);
-                } catch (\Throwable $e) {
-                    $log()->error($e->getMessage());
-                    $answer = 'ERROR';
-                }
-
-                if ($answer == 'ERROR') {
-                    $answer = 'Упс! Кажется что-то пошло не так. ' .
-                        'Пожалуйста, попробуйте позже или обратитесь к разработчику.';
-                }
-
+                $answer = $handler->run($message);
                 $bot->sendMessage($message->getChat()->getId(), $answer, 'html', false, null, $keyboard);
             });
         }

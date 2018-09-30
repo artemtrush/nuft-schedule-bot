@@ -21,6 +21,13 @@ class Group extends Base
             'groupName' => $matches[1],
         ];
 
-        return $this->action('Service\Group\Сreate')->run($data);
+        try {
+            $result = $this->action('Service\Group\Сreate')->run($data);
+        } catch (\Throwable $e) {
+            $this->log()->error($e->getMessage());
+            return $this->error();
+        }
+
+        return $result;
     }
 }

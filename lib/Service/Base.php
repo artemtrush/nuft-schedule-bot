@@ -6,11 +6,13 @@ abstract class Base
 {
     private $log;
     private $config;
+    private $error;
 
     public function __construct($attrs)
     {
-        $this->log = $attrs['log'] ?? null;
+        $this->log    = $attrs['log'] ?? null;
         $this->config = $attrs['config'] ?? null;
+        $this->error  = $attrs['error'] ?? null;
     }
 
     protected function sendPostRequest($data, $url) : string
@@ -43,6 +45,11 @@ abstract class Base
     protected function config()
     {
         return $this->config;
+    }
+
+    protected function error()
+    {
+        return $this->error;
     }
 
     public function validate(array $params) {

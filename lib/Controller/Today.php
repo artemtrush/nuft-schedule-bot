@@ -14,6 +14,13 @@ class Today extends Base
             'endDate'   => $date
         ];
 
-        return $this->action('Service\Schedule\Show')->run($data);
+        try {
+            $result = $this->action('Service\Schedule\Show')->run($data);
+        } catch (\Throwable $e) {
+            $this->log()->error($e->getMessage());
+            return $this->error();
+        }
+
+        return $result;
     }
 }

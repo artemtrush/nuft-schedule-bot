@@ -10,7 +10,7 @@ class Show extends \Service\Base
             $this->pdo = \Engine\Engine::getConnection('db');
         } catch (\PDOException $e) {
             $this->log()->error($e->getMessage());
-            return 'ERROR';
+            return $this->error();
         }
 
         $group = $this->getGroupName($params['chatID']);

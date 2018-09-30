@@ -28,7 +28,13 @@ abstract class Base
     {
         return new $class([
             'log'    => $this->log(),
-            'config' => $this->config()
+            'config' => $this->config(),
+            'error'  => $this->error()
         ]);
+    }
+
+    public function error()
+    {
+        return 'Упс! Кажется что-то пошло не так. Пожалуйста, попробуйте позже или обратитесь к разработчику.';
     }
 }

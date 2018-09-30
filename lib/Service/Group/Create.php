@@ -10,7 +10,7 @@ class Create extends \Service\Base
             $this->pdo = \Engine\Engine::getConnection('db');
         } catch (\PDOException $e) {
             $this->log()->error($e->getMessage());
-            return 'ERROR';
+            return $this->error();
         }
 
         //@TODOT
