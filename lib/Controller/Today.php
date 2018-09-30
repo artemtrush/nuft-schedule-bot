@@ -6,7 +6,7 @@ class Today extends Base
 {
     public function run($message)
     {
-        $date = date(DATE_FORMAT);
+        $date = date(self::DATE_FORMAT);
 
         $data = [
             'chatID'    => $message->getChat()->getId(),
