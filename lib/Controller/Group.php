@@ -22,7 +22,7 @@ class Group extends Base
         ];
 
         try {
-            $result = $this->action('Service\Group\Сreate')->run($data);
+            $result = $this->action('Service\Group\Create')->run($data);
         } catch (\Throwable $e) {
             $this->log()->error($e->getMessage());
             return $this->error();
