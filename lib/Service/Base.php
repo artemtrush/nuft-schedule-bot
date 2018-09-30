@@ -32,7 +32,6 @@ abstract class Base
             return $result;
         } catch (\Exception $e) {
             $this->log()->error('Exception: ' . $e->getMessage());
-
             throw $e;
         }
     }
