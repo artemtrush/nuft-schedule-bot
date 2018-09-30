@@ -78,7 +78,7 @@ class Show extends \Service\Base
         $numbers = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
 
         foreach ($data as $dayData) {
-            $schedule .= $dayData['day'] . ' ' . $dayData['time'] . PHP_EOL;
+            $schedule .= $dayData['day'] . ' ' . $dayData['date'] . PHP_EOL;
 
             foreach ($dayData['lessons'] as $lesson) {
                 $schedule .= ':' . $numbers[ $lesson['number'] ] . ': ' .
