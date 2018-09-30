@@ -35,7 +35,7 @@ class Show extends \Service\Base
         return $this->generateSchedule($scheduleData);
     }
 
-    public function treatResponse(string $response) {
+    private function treatResponse(string $response) {
         $document = iconv('Windows-1251', 'UTF-8', $response);
         $text = preg_replace('/\s+/', ' ', $document);
         $data = [];
@@ -73,15 +73,14 @@ class Show extends \Service\Base
         return $data;
     }
 
-    public function generateSchedule(array $data) {
+    private function generateSchedule(array $data) {
         $schedule = '';
-        $numbers = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
 
         foreach ($data as $dayData) {
             $schedule .= $dayData['day'] . ' ' . $dayData['date'] . PHP_EOL;
 
             foreach ($dayData['lessons'] as $lesson) {
-                $schedule .= ':' . $numbers[ $lesson['number'] ] . ': ' .
+                $schedule .= $this->createEmoji('\x3' . $lesson['number'] . '\xE2\x83\xA3') . ' ' .
                              $lesson['stime'] . '-' . $lesson['etime'] . ': ' .
                              $lesson['description'] . PHP_EOL;
             }
@@ -94,5 +93,18 @@ class Show extends \Service\Base
 
         return $schedule;
     }
+
+    private function createEmoji(string $emojiUtf8Byte) {
+        $pattern = '@\\\x([0-9a-fA-F]{2})@x';
+
+        return preg_replace_callback(
+            $pattern,
+            function ($captures) {
+                return chr(hexdec($captures[1]));
+            },
+            $emojiUtf8Byte
+        );
+    }
+
 }
 
