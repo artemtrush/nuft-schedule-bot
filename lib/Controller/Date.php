@@ -6,9 +6,22 @@ class Date extends Base
 {
     public function run($message)
     {
-        $answer = 'test';
+        $correctFormat = preg_match(
+            '/^\/date (' . self::DATE_REGEXP . ') ('. self::DATE_REGEXP .')$/',
+            trim($message->getText()),
+            $matches
+        );
 
-        return $answer;
-        // return $this->action('Service\Date\Create')->run($data);
+        if (!$correctFormat) {
+            return 'Неверный формат даты. Пример правильного формата можно посмотреть в /help';
+        }
+
+        $data = [
+            'chatID'    => $message->getChat()->getId(),
+            'startDate' => $matches[1],
+            'endDate'   => $matches[2]
+        ];
+
+        return $this->action('Service\Schedule\Show')->run($data);
     }
 }

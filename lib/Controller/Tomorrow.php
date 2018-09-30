@@ -6,7 +6,7 @@ class Tomorrow extends Base
 {
     public function run($message)
     {
-        $date = date(self::DATE_FORMAT, strtotime('+1 day'));
+        $date = date(self::DATE_FORMAT, strtotime('tomorrow'));
 
         $data = [
             'chatID'    => $message->getChat()->getId(),

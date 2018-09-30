@@ -15,10 +15,10 @@ class AppFactory
 
         $keyboard = new \TelegramBot\Api\Types\ReplyKeyboardMarkup([
             ['/today', '/tomorrow'],
-            ['/help', '/prev_week', '/next_week']
+            ['/help', '/current_week', '/next_week']
         ]);
 
-        $commands = ['start', 'help', 'group', 'today', 'tomorrow', 'prev_week', 'next_week', 'date'];
+        $commands = ['start', 'help', 'group', 'today', 'tomorrow', 'current_week', 'next_week', 'date'];
         foreach ($commands as $command) {
             $controller = 'Controller\\' . ucfirst($command);
             $handler = new $controller([

@@ -2,12 +2,12 @@
 
 namespace Controller;
 
-class Next_week extends Base
+class Current_week extends Base
 {
     public function run($message)
     {
-        $startDate = date(self::DATE_FORMAT, strtotime('Monday next week'));
-        $endDate   = date(self::DATE_FORMAT, strtotime('Monday next week'));
+        $startDate = date(self::DATE_FORMAT, strtotime('Monday this week'));
+        $endDate   = date(self::DATE_FORMAT, strtotime('Friday this week'));
 
         $data = [
             'chatID'    => $message->getChat()->getId(),
