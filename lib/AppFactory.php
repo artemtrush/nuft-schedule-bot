@@ -35,6 +35,13 @@ class AppFactory
                 $bot->sendMessage($message->getChat()->getId(), $answer);
             });
 
+            $bot->command('start', function ($message) use ($bot) {
+                $answer = 'Добро пожаловать!';
+                $bot->sendMessage($message->getChat()->getId(), $answer);
+            });
+
+            $answer = 'Message=['.$bot->getMessage().']';
+            $bot->sendMessage($message->getChat()->getId(), $answer);
             // $app = new Slim\App($container);
             // $app->post('/order/', [new Controller\Order($app), 'create']);
 
