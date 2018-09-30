@@ -2,10 +2,10 @@
 
 return [
     'telegram' => [
-        'token' => '696268889:AAGMD4oB75zg6kLA9ym6lLCb4j3WQPkzaeM'
+        'token' => ''
     ],
     'timetable' => [
-        'url' => 'http://nmu.nuft.edu.ua/cgi-bin/timetable.cgi?n=700'
+        'url' => ''
     ],
     'monolog' => [
         'name'     => 'app',
@@ -15,8 +15,8 @@ return [
         'type'     => 'mysql',
         'host'     => 'db19.freehost.com.ua',
         'name'     => 'vpjuns_schedule',
-        'user'     => 'vpjuns_schedule',
-        'password' => 'SQschedule',
+        'user'     => '',
+        'password' => '',
         'charset'  => 'utf8',
     ]
 ];
