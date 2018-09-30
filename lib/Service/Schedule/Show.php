@@ -32,7 +32,7 @@ class Show extends \Service\Base
         $response = $this->sendPostRequest($data, $url);
         $scheduleData = $this->treatResponse($response);
 
-        return generateSchedule($scheduleData);
+        return $this->generateSchedule($scheduleData);
     }
 
     public function treatResponse(string $response) {
