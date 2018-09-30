@@ -17,7 +17,7 @@ class Show extends \Service\Base
         //     $this->log()->error($e->getMessage());
         //     return ['Status' => 0];
         // }
-        $group = 'КН-3-5';
+        $group = 'КН-4  -5';
 
         $data = [
             'group' => iconv('UTF-8', 'Windows-1251', $group),
@@ -40,16 +40,16 @@ class Show extends \Service\Base
         $text = preg_replace('/\s+/', ' ', $document);
         $data = [];
 
-        $rowPattern = '/<div class=\"col-md-6\">(.+)<\/div>/';
-        preg_match($rowPattern, $text, $rows);
-        foreach ($rows as $row) {
+        $rowPattern = '/<div class="col-md-6">(.+?)<\/table><\/div>/';
+        preg_match_all($rowPattern, $text, $rows);
+        foreach ($rows[0] as $row) {
             $datePattern = '/<h4>(.+?) <small>(.+?)<\/small><\/h4>/';
             preg_match($datePattern, $row, $dateInfo);
 
             $lessonsInfo = [];
-            $lessonPattern = '/<div class=\"row\"><tr>(.+)<\/tr><\/div>/';
-            preg_match($lessonPattern, $row, $lessons);
-            foreach ($lessons as $lesson) {
+            $lessonPattern = '/<tr>(.+?)<\/tr>/';
+            preg_match_all($lessonPattern, $row, $lessons);
+            foreach ($lessons[0] as $lesson) {
                 $infoPattern = '/<td>(.+?)<\/td><td>(.+?)<br>(.+?)<\/td><td>(.+?)<\/td>/';
                 if (preg_match($infoPattern, $lesson, $info)) {
                     $lessonsInfo[] = [
@@ -63,8 +63,8 @@ class Show extends \Service\Base
 
             if (!empty($dateInfo) && !empty($lessonsInfo)) {
                 $data[] = [
-                    'date'    => $dateInfo[0],
-                    'day'     => $dateInfo[1],
+                    'date'    => $dateInfo[1],
+                    'day'     => $dateInfo[2],
                     'lessons' => $lessonsInfo
                 ];
             }

@@ -7,7 +7,7 @@ class Next_week extends Base
     public function run($message)
     {
         $startDate = date(self::DATE_FORMAT, strtotime('Monday next week'));
-        $endDate   = date(self::DATE_FORMAT, strtotime('Monday next week'));
+        $endDate   = date(self::DATE_FORMAT, strtotime('Friday next week'));
 
         $data = [
             'chatID'    => $message->getChat()->getId(),
