@@ -17,7 +17,7 @@ class Show extends \Service\Base
         //     $this->log()->error($e->getMessage());
         //     return ['Status' => 0];
         // }
-        $group = 'КН-4  -5';
+        $group = 'КН-4-5';
 
         $data = [
             'group' => iconv('UTF-8', 'Windows-1251', $group),
@@ -98,3 +98,4 @@ class Show extends \Service\Base
         return $schedule;
     }
 }
+
