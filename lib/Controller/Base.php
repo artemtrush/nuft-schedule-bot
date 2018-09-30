@@ -5,6 +5,7 @@ namespace Controller;
 abstract class Base
 {
     protected $app;
+    public const DATE_FORMAT = 'd.m.Y';
 
     public function __construct($app)
     {

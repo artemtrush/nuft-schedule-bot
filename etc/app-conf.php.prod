@@ -2,7 +2,10 @@
 
 return [
     'telegram' => [
-        'token' => ''
+        'token' => '696268889:AAGMD4oB75zg6kLA9ym6lLCb4j3WQPkzaeM'
+    ],
+    'timetable' => [
+        'url' => 'http://nmu.nuft.edu.ua/cgi-bin/timetable.cgi?n=700'
     ],
     'monolog' => [
         'name'     => 'app',

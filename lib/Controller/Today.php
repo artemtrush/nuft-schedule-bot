@@ -6,8 +6,14 @@ class Today extends Base
 {
     public function run($message)
     {
-        $answer = 'test';
+        $date = date(DATE_FORMAT);
 
-        return $answer;
+        $data[
+            'chatID'    => $message->getChat()->getId(),
+            'startDate' => $date,
+            'endDate'   => $date
+        ]
+
+        return $this->action('Service\Schedule\Show')->run($data);
     }
 }

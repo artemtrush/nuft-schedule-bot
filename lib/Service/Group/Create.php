@@ -1,21 +1,12 @@
 <?php
 
-namespace Service\Card;
+namespace Service\Group;
 
 class Create extends \Service\Base
 {
-    private const EMPLOYMENTS_MAP = [
-        0 => 'Официально трудоустроен',
-        1 => 'Работаю не официально',
-        2 => 'Работаю на СПД',
-        3 => 'В декретном отпуске',
-        4 => 'Временно не работаю',
-        5 => 'Пенсионер',
-        6 => 'Студент'
-    ];
-
     public function validate(array $params)
     {
+        /*
         $rules = [
             'FirstName'    => ['required', ['max_length' => 38]],
             'SecondName'   => ['required', ['max_length' => 38]],
@@ -62,11 +53,12 @@ class Create extends \Service\Base
         }
 
         return \Service\Validator::validate($params, $rules);
+        */
     }
 
     public function execute(array $params)
     {
-
+        /*
         try {
             $this->pdo = \Engine\Engine::getConnection('main');
         } catch (\PDOException $e) {
@@ -113,8 +105,10 @@ class Create extends \Service\Base
             'Status'    => 1,
             'BidId'     => $id,
         ];
+        */
     }
 
+    /*
     private function sendRequestToBanks($id, $params, $isDuplicate)
     {
         $banks = [];
@@ -252,4 +246,5 @@ class Create extends \Service\Base
 
         $stmt->execute();
     }
+    */
 }
