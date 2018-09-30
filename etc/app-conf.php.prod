@@ -13,10 +13,10 @@ return [
     ],
     'dbConfig' => [
         'type'     => 'mysql',
-        'host'     => 'localhost',
-        'name'     => 'schedule',
-        'user'     => 'root',
-        'password' => '',
+        'host'     => 'db19.freehost.com.ua',
+        'name'     => 'vpjuns_schedule',
+        'user'     => 'vpjuns_schedule',
+        'password' => 'SQschedule',
         'charset'  => 'utf8',
     ]
 ];

@@ -7,7 +7,7 @@ class Date extends Base
     public function run($message)
     {
         $correctFormat = preg_match(
-            '/^\/date (' . self::DATE_REGEXP . ') ('. self::DATE_REGEXP .')$/',
+            '/^\/date\s+(' . self::DATE_REGEXP . ')\s+('. self::DATE_REGEXP .')$/',
             trim($message->getText()),
             $matches
         );

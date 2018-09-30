@@ -4,20 +4,20 @@ namespace Service\Schedule;
 
 class Show extends \Service\Base
 {
-    public function validate(array $params)
-    {
-        return $params;
-    }
-
     public function execute(array $params)
     {
-        // try {
-        //     $this->pdo = \Engine\Engine::getConnection('main');
-        // } catch (\PDOException $e) {
-        //     $this->log()->error($e->getMessage());
-        //     return ['Status' => 0];
-        // }
-        $group = 'КН-4-5';
+        try {
+            $this->pdo = \Engine\Engine::getConnection('db');
+        } catch (\PDOException $e) {
+            $this->log()->error($e->getMessage());
+            return 'ERROR';
+        }
+
+        $group = $this->getGroupName($params['chatID']);
+        if (!$group) {
+            //@TODOT
+            return 'Нету группы';
+        }
 
         $data = [
             'group' => iconv('UTF-8', 'Windows-1251', $group),
@@ -33,6 +33,20 @@ class Show extends \Service\Base
         $scheduleData = $this->treatResponse($response);
 
         return $this->generateSchedule($scheduleData);
+    }
+
+    private function getGroupName(integer $chatID) {
+        $query = "
+            SELECT `groups`.`name` FROM `groups`
+            INNER JOIN `groupsMap` ON `groups`.`id` = `groupsMap`.`groupID`
+            WHERE `groupsMap`.`chatID` = :chatID
+        ";
+
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':chatID', $chatID, \PDO::PARAM_INT);
+        $stmt->execute();
+
+        return (string)$stmt->fetchColumn();
     }
 
     private function treatResponse(string $response) {
