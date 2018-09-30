@@ -8,11 +8,11 @@ class Help extends Base
     {
         $text =
             'А вот полный список моих команд:' . PHP_EOL .
-            '/start - текст' . PHP_EOL
-            '/help  - текст' . PHP_EOL
-            '/today - текст' . PHP_EOL
-            '/start - текст' . PHP_EOL
-            '/start - текст' . PHP_EOL
+            '/start - текст' . PHP_EOL .
+            '/help  - текст' . PHP_EOL .
+            '/today - текст' . PHP_EOL .
+            '/start - текст' . PHP_EOL .
+            '/start - текст' . PHP_EOL .
             '/start - текст'
         ;
 
