@@ -30,20 +30,23 @@ class AppFactory
                 $bot->sendMessage($message->getChat()->getId(), $answer);
             });
 
-            $bot->command('', function ($message) use ($bot) {
-                $answer = 'Pusto';
-                $bot->sendMessage($message->getChat()->getId(), $answer);
-            });
+            $bot->command('test', function ($message) use ($bot) {
 
-            $bot->command('start', function ($message) use ($bot) {
-                $answer = 'Добро пожаловать!';
-                $bot->sendMessage($message->getChat()->getId(), $answer);
-            });
 
-            $answer = 'Message=['.$bot->getMessage().']';
-            $bot->sendMessage($message->getChat()->getId(), $answer);
-            // $app = new Slim\App($container);
-            // $app->post('/order/', [new Controller\Order($app), 'create']);
+                $answer = '1:';
+                $keyboard = new \TelegramBot\Api\Types\ReplyKeyboardMarkup(array(array("one", "two", "three")), true);
+                $bot->sendMessage($message->getChat()->getId(), $answer, null, false, null, $keyboard);
+
+                $answer = '2:';
+                $keyboard = new \TelegramBot\Api\Types\Inline\InlineKeyboardMarkup(
+                    [
+                        [
+                            ['text' => 'link', 'url' => 'https://core.telegram.org']
+                        ]
+                    ]
+                );
+                $bot->sendMessage($message->getChat()->getId(), $answer, null, false, null, $keyboard);
+            });
 
         } catch (\TelegramBot\Api\Exception $e) {
             $e->getMessage();
