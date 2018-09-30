@@ -13,14 +13,13 @@ class Create extends \Service\Base
             return $this->error();
         }
 
-        //@TODOT
         $groupID = $this->getGroupID($params['groupName']);
         if (!$groupID) {
-            return 'Группа не найдена';
+            return 'К сожалению, я не нашел группы с таким названием. Проверьте правильность написания.';
         }
 
         $this->setChatGroup($params['chatID'], $groupID);
-        return 'Группа добавлена';
+        return 'Группа ' . $params['groupName'] . ' установлена по умолчанию. Теперь я могу искать расписание!';
     }
 
     private function getGroupID(string $groupName) {

@@ -1,6 +1,6 @@
 {
     "name": "Telegram nuft-schedule bot",
-    "description": "",
+    "description": "Telegram nuft-schedule bot",
     "keywords": ["nuft-schedule"],
     "authors": [
         {
@@ -10,10 +10,7 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "slim/slim": "3.*",
         "monolog/monolog": "1.*",
-        "validator/livr": "dev-master",
-        "econea/nusoap": "v0.9.5.4",
         "telegram-bot/api": "^2.3"
     },
     "autoload": {

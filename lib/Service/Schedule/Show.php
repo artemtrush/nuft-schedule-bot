@@ -15,8 +15,7 @@ class Show extends \Service\Base
 
         $group = $this->getGroupName($params['chatID']);
         if (!$group) {
-            //@TODOT
-            return 'Нету группы';
+            return 'Перед тем как искать расписание, нужно отправить мне название группы /group';
         }
 
         $data = [
@@ -102,7 +101,8 @@ class Show extends \Service\Base
         }
 
         if (!$schedule) {
-            return 'Не найдено';
+            return 'Я не нашел расписания на указанную дату. Можно спокойно отдыхать ' .
+                $this->createEmoji('\xF0\x9F\x98\x8C');
         }
 
         return $schedule;
