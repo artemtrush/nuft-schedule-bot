@@ -13,6 +13,8 @@ class AppFactory
             return $log;
         };
 
+        $log->info('test1');
+
         $keyboard = new \TelegramBot\Api\Types\ReplyKeyboardMarkup([
             ['/today', '/tomorrow'],
             ['/help', '/prev_week', '/next_week']
