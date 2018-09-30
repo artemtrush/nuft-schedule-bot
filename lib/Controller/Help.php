@@ -7,7 +7,7 @@ class Help extends Base
     public function run($message)
     {
 
-        $thunderstorm = u'\U0001F4A8';
+        $thunderstorm = '\x37\xE2\x83\xA3   sss  \xF0\x9F\x98\x81';
 
         $text =
             '/start - текст' . PHP_EOL .
