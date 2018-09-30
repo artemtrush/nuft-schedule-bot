@@ -40,14 +40,14 @@ class Show extends \Service\Base
         $text = preg_replace('/\s+/', ' ', $document);
         $data = [];
 
-        $rowPattern = '/<div class=\"col-md-6\">(.+?)<\/div>/';
+        $rowPattern = '/<div class=\"col-md-6\">(.+)<\/div>/';
         preg_match($rowPattern, $text, $rows);
         foreach ($rows as $row) {
             $datePattern = '/<h4>(.+?) <small>(.+?)<\/small><\/h4>/';
             preg_match($datePattern, $row, $dateInfo);
 
             $lessonsInfo = [];
-            $lessonPattern = '/<div class=\"row\"><tr>(.+?)<\/tr><\/div>/';
+            $lessonPattern = '/<div class=\"row\"><tr>(.+)<\/tr><\/div>/';
             preg_match($lessonPattern, $row, $lessons);
             foreach ($lessons as $lesson) {
                 $infoPattern = '/<td>(.+?)<\/td><td>(.+?)<br>(.+?)<\/td><td>(.+?)<\/td>/';
