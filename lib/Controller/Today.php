@@ -8,11 +8,11 @@ class Today extends Base
     {
         $date = date(DATE_FORMAT);
 
-        $data[
+        $data = [
             'chatID'    => $message->getChat()->getId(),
             'startDate' => $date,
             'endDate'   => $date
-        ]
+        ];
 
         return $this->action('Service\Schedule\Show')->run($data);
     }
