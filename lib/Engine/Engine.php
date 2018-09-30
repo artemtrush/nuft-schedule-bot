@@ -2,7 +2,7 @@
 
 namespace Engine;
 
-use PDO;
+use \PDO;
 
 class Engine
 {
