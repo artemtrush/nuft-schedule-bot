@@ -19,11 +19,11 @@ class Create extends \Service\Base
             return 'Группа не найдена';
         }
 
-        $this->setChatGroup($params['chatID'], $groupID);
+        $this->setChatGroup(intval($params['chatID']), $groupID);
         return 'Группа добавлена';
     }
 
-    private function getGroupID(integer $groupName) {
+    private function getGroupID(string $groupName) {
         $query = "
             SELECT `id` FROM `groups`
             WHERE `name` = :name

@@ -13,7 +13,9 @@ class Show extends \Service\Base
             return $this->error();
         }
 
-        $group = $this->getGroupName($params['chatID']);
+        $this->log()->info($params['chatID']);
+
+        $group = $this->getGroupName(intval($params['chatID']));
         if (!$group) {
             //@TODOT
             return 'Нету группы';
