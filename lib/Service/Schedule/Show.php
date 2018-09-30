@@ -13,9 +13,7 @@ class Show extends \Service\Base
             return $this->error();
         }
 
-        $this->log()->info($params['chatID']);
-
-        $group = $this->getGroupName(intval($params['chatID']));
+        $group = $this->getGroupName($params['chatID']);
         if (!$group) {
             //@TODOT
             return 'Нету группы';
@@ -37,7 +35,7 @@ class Show extends \Service\Base
         return $this->generateSchedule($scheduleData);
     }
 
-    private function getGroupName(integer $chatID) {
+    private function getGroupName(int $chatID) {
         $query = "
             SELECT `groups`.`name` FROM `groups`
             INNER JOIN `groupsMap` ON `groups`.`id` = `groupsMap`.`groupID`

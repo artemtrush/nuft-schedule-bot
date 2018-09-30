@@ -19,7 +19,7 @@ class Create extends \Service\Base
             return 'Группа не найдена';
         }
 
-        $this->setChatGroup(intval($params['chatID']), $groupID);
+        $this->setChatGroup($params['chatID'], $groupID);
         return 'Группа добавлена';
     }
 
@@ -33,10 +33,10 @@ class Create extends \Service\Base
         $stmt->bindParam(':name', $groupName, \PDO::PARAM_STR);
         $stmt->execute();
 
-        return (integer)$stmt->fetchColumn();
+        return (int)$stmt->fetchColumn();
     }
 
-    private function setChatGroup(integer $chatID, integer $groupID) {
+    private function setChatGroup(int $chatID, int $groupID) {
         $query = "
             REPLACE INTO `groupsMap`
             VALUES (:chatID, :groupID)
