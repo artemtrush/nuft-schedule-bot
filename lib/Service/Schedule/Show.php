@@ -38,6 +38,9 @@ class Show extends \Service\Base
     public function treatResponse(string $response) {
         $document = iconv('Windows-1251', 'UTF-8', $response);
         $text = preg_replace('/\s+/', ' ', $document);
+
+        $this->log()->info($text);
+
         $data = [];
 
         $rowPattern = '/<div class="col-md-6">(.+?)<\/table><\/div>/';
