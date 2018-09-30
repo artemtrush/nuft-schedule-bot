@@ -2,7 +2,7 @@
 
 namespace Engine;
 
-use \PDO;
+use PDO;
 
 class Engine
 {
@@ -13,7 +13,7 @@ class Engine
         if (isset(self::$connections[$name])) {
             return false;
         }
-        $dsn = "{$config['type']}:dbname={$config['name']}";
+        $dsn = "{$config['type']}:host={$config['host']};dbname={$config['name']}";
         $username = $config['user'];
         $password = $config['password'];
         $opt = [
