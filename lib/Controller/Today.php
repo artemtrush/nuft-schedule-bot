@@ -8,8 +8,6 @@ class Today extends Base
     {
         $date = date(self::DATE_FORMAT);
 
-        $this->log()->info('test2');
-
         $data = [
             'chatID'    => $message->getChat()->getId(),
             'startDate' => $date,

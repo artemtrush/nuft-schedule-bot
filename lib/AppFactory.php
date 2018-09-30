@@ -13,8 +13,6 @@ class AppFactory
             return $log;
         };
 
-        $log->info('test1');
-
         $keyboard = new \TelegramBot\Api\Types\ReplyKeyboardMarkup([
             ['/today', '/tomorrow'],
             ['/help', '/prev_week', '/next_week']
@@ -24,7 +22,7 @@ class AppFactory
         foreach ($commands as $command) {
             $controller = 'Controller\\' . ucfirst($command);
             $handler = new $controller([
-                'log'    => $log,
+                'log'    => $log(),
                 'config' => $config
             ]);
 
