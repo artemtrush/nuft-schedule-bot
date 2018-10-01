@@ -16,7 +16,7 @@ class AppFactory
         $keyboard = new \TelegramBot\Api\Types\ReplyKeyboardMarkup([
             ['/today', '/tomorrow'],
             ['/help', '/current_week', '/next_week']
-        ]);
+        ], false, true, false);
 
         $commands = ['start', 'help', 'group', 'today', 'tomorrow', 'current_week', 'next_week', 'date'];
         foreach ($commands as $command) {
