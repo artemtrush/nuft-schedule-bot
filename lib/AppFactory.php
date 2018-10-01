@@ -14,16 +14,8 @@ class AppFactory
         };
 
         $keyboard = new \TelegramBot\Api\Types\ReplyKeyboardMarkup([
-            [
-                ['text' => 'Сегодня', 'callback_data' => '/today'],
-                ['text' => 'Завтра', 'callback_data' => '/tomorrow']
-            ],
-            [
-                ['text' => 'Текущая неделя', 'callback_data' => '/current_week']
-            ],
-            [
-                ['text' => 'Следующая неделя', 'callback_data' => '/next_week']
-            ]
+            ['/today', '/tomorrow'],
+            ['/current_week', '/next_week']
         ], false, true, false);
 
         $commands = ['start', 'help', 'group', 'today', 'tomorrow', 'current_week', 'next_week', 'date'];
