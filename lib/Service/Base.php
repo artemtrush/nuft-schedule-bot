@@ -54,9 +54,7 @@ abstract class Base
             $filename = $this->config()['cache']['dir'] . $key;
             if (file_exists($filename)) {
                 $data = unserialize(file_get_contents($filename));
-                if (!isset($data['time']) || $data['time'] < time() - (7 * 24 * 60 * 60)) {
-                    unlink($filename);
-                } else if (isset($data['value'])) {
+                if (isset($data['value'])) {
                     return $data['value'];
                 }
             }

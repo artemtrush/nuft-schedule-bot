@@ -13,19 +13,19 @@ class Show extends \Service\Base
             return $this->error();
         }
 
-        $group = $this->getGroupName($params['chatID']);
-        if (!$group) {
+        $group = $this->getGroup($params['chatID']);
+        if (!$group['name'] || !$group['id']) {
             return 'Перед тем как искать расписание, нужно отправить мне название группы /group';
         }
 
-        $cacheKey = 'ServiceScheduleShow__' . $group . '_' . $params['startDate'] . '_' . $params['endDate'];
+        $cacheKey = 'ServiceScheduleShow__' . $group['id'] . '_' . $params['startDate'] . '_' . $params['endDate'];
         $cache = $this->getCache($cacheKey);
         if ($cache) {
             return $cache;
         }
 
         $data = [
-            'group' => iconv('UTF-8', 'Windows-1251', $group),
+            'group' => iconv('UTF-8', 'Windows-1251', $group['name']),
             'sdate' => $params['startDate'],
             'edate' => $params['endDate'],
             'faculty' => 0,
@@ -47,9 +47,9 @@ class Show extends \Service\Base
         return $schedule;
     }
 
-    private function getGroupName(int $chatID) {
+    private function getGroup(int $chatID) {
         $query = "
-            SELECT `groups`.`name` FROM `groups`
+            SELECT `groups`.`name`, `groups`.`id` FROM `groups`
             INNER JOIN `groupsMap` ON `groups`.`id` = `groupsMap`.`groupID`
             WHERE `groupsMap`.`chatID` = :chatID
         ";
@@ -58,7 +58,7 @@ class Show extends \Service\Base
         $stmt->bindParam(':chatID', $chatID, \PDO::PARAM_INT);
         $stmt->execute();
 
-        return (string)$stmt->fetchColumn();
+        return $stmt->fetch();
     }
 
     private function treatResponse(string $response) {
