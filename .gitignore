@@ -2,3 +2,5 @@ vendor
 etc/app-conf.php
 logs/*
 !logs/.gitkeep
+cache/*
+!cache/.gitkeep

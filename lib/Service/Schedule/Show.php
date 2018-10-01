@@ -18,6 +18,12 @@ class Show extends \Service\Base
             return 'Перед тем как искать расписание, нужно отправить мне название группы /group';
         }
 
+        $cacheKey = 'ServiceScheduleShow__' . $group . '_' . $params['startDate'] . '_' . $params['endDate'];
+        $cache = $this->getCache($cacheKey);
+        if ($cache) {
+            return $cache;
+        }
+
         $data = [
             'group' => iconv('UTF-8', 'Windows-1251', $group),
             'sdate' => $params['startDate'],
@@ -30,8 +36,15 @@ class Show extends \Service\Base
 
         $response = $this->sendPostRequest($data, $url);
         $scheduleData = $this->treatResponse($response);
+        $schedule = $this->generateSchedule($scheduleData);
 
-        return $this->generateSchedule($scheduleData);
+        if (!$schedule) {
+            return 'Я не нашел расписания на указанную дату. Можно спокойно отдыхать ' .
+                $this->createEmoji('\xF0\x9F\x98\x8C');
+        }
+
+        $this->setCache($cacheKey, $schedule);
+        return $schedule;
     }
 
     private function getGroupName(int $chatID) {
@@ -100,25 +113,6 @@ class Show extends \Service\Base
             $schedule .= PHP_EOL;
         }
 
-        if (!$schedule) {
-            return 'Я не нашел расписания на указанную дату. Можно спокойно отдыхать ' .
-                $this->createEmoji('\xF0\x9F\x98\x8C');
-        }
-
         return $schedule;
     }
-
-    private function createEmoji(string $emojiUtf8Byte) {
-        $pattern = '@\\\x([0-9a-fA-F]{2})@x';
-
-        return preg_replace_callback(
-            $pattern,
-            function ($captures) {
-                return chr(hexdec($captures[1]));
-            },
-            $emojiUtf8Byte
-        );
-    }
-
 }
-

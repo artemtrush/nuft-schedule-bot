@@ -37,6 +37,51 @@ abstract class Base
         return $response;
     }
 
+    protected function createEmoji(string $emojiUtf8Byte) {
+        $pattern = '@\\\x([0-9a-fA-F]{2})@x';
+
+        return preg_replace_callback(
+            $pattern,
+            function ($captures) {
+                return chr(hexdec($captures[1]));
+            },
+            $emojiUtf8Byte
+        );
+    }
+
+    protected function getCache(string $key) {
+        if ($key) {
+            $filename = $this->config()['cache']['dir'] . $key;
+            if (file_exists($filename)) {
+                $data = unserialize(file_get_contents($filename));
+                if (!isset($data['time']) || $data['time'] < time() - (7 * 24 * 60 * 60)) {
+                    unlink($filename);
+                } else if (isset($data['value'])) {
+                    return $data['value'];
+                }
+            }
+        }
+
+        return null;
+    }
+
+    protected function setCache(string $key, mixed $value) {
+        $data = serialize([
+            'time'  => time(),
+            'value' => $value
+        ]);
+
+        $dir = $this->config()['cache']['dir'];
+        if (file_exists($dir)) {
+            file_put_contents($dir . $key, $data);
+            return true;
+        } else {
+            $this->log()->error('Cache directory not exists');
+        }
+
+        return false;
+    }
+
     protected function log()
     {
         return $this->log;

@@ -11,6 +11,9 @@ return [
         'name'     => 'app',
         'filepath' => __DIR__ . '/../logs/app.log'
     ],
+    'cache' => [
+        'dir' => __DIR__ . '/../cache/'
+    ],
     'dbConfig' => [
         'type'     => 'mysql',
         'host'     => 'db19.freehost.com.ua',
