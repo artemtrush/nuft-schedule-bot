@@ -65,7 +65,7 @@ abstract class Base
         return null;
     }
 
-    protected function setCache(string $key, mixed $value) {
+    protected function setCache(string $key, $value) {
         $data = serialize([
             'time'  => time(),
             'value' => $value
