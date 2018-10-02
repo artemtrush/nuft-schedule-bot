@@ -113,7 +113,7 @@ class Show extends \Service\Base
             $schedule .= PHP_EOL;
         }
 
-        $schedule = str_replace('<br>', PHP_EOL, $schedule);
+        $schedule = str_replace('<br>', '; ', $schedule);
         $schedule = strip_tags($schedule, '<b>');
 
         return $schedule;
