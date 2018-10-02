@@ -4,6 +4,7 @@ namespace Service;
 
 abstract class Base
 {
+    private $pdo;
     private $log;
     private $config;
     private $error;
@@ -13,6 +14,26 @@ abstract class Base
         $this->log    = $attrs['log'] ?? null;
         $this->config = $attrs['config'] ?? null;
         $this->error  = $attrs['error'] ?? null;
+        try {
+            $this->pdo = \Engine\Engine::getConnection('db');
+        } catch (\PDOException $e) {
+            $this->log()->error($e->getMessage());
+            $this->pdo = null;
+        }
+    }
+
+    protected function getUserGroup(int $chatID) {
+        $query = "
+            SELECT `groups`.`name`, `groups`.`id` FROM `groups`
+            INNER JOIN `users` ON `groups`.`id` = `users`.`groupID`
+            WHERE `users`.`chatID` = :chatID
+        ";
+
+        $stmt = $this->pdo()->prepare($query);
+        $stmt->bindParam(':chatID', $chatID, \PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch();
     }
 
     protected function sendPostRequest($data, $url) : string
@@ -78,6 +99,11 @@ abstract class Base
         }
 
         return false;
+    }
+
+    protected function pdo()
+    {
+        return $this->pdo;
     }
 
     protected function log()

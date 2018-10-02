@@ -5,6 +5,9 @@ class AppFactory
     public static function create($config)
     {
         $bot = new \TelegramBot\Api\Client($config['telegram']['token']);
+        if (!$bot->getRawBody()) {
+            exit;
+        }
 
         $log = function () use ($config) {
             $log = new \Monolog\Logger($config['monolog']['name']);
@@ -18,7 +21,19 @@ class AppFactory
             ['/current_week', '/next_week']
         ], false, true, false);
 
-        $commands = ['start', 'help', 'group', 'today', 'tomorrow', 'current_week', 'next_week', 'date'];
+        $commands = [
+            'start',
+            'help',
+            'group',
+            'today',
+            'tomorrow',
+            'current_week',
+            'next_week',
+            'date',
+            'sub',
+            'sub_time'
+        ];
+
         foreach ($commands as $command) {
             $controller = 'Controller\\' . ucfirst($command);
             $handler = new $controller([
@@ -26,10 +41,14 @@ class AppFactory
                 'config' => $config
             ]);
 
-            $bot->command($command, function ($message) use ($bot, $handler, $keyboard) {
-                $answer = $handler->run($message);
-                $bot->sendMessage($message->getChat()->getId(), $answer, 'html', false, null, $keyboard);
-            });
+            try {
+                $bot->command($command, function ($message) use ($bot, $handler, $keyboard) {
+                    $answer = $handler->run($message);
+                    $bot->sendMessage($message->getChat()->getId(), $answer, 'html', false, null, $keyboard);
+                });
+            } catch (\TelegramBot\Api\Exception $e) {
+                $log()->error($e->getMessage());
+            }
         }
 
         return $bot;

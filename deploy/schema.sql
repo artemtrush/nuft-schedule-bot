@@ -1,11 +1,15 @@
-CREATE TABLE IF NOT EXISTS `groupsMap` (
-  `chatID`           INT(11)  NOT NULL DEFAULT 0,
-  `groupID`          INT(11)  NOT NULL DEFAULT 0,
-  PRIMARY KEY (`chatID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE IF NOT EXISTS `groups` (
   `id`    INT(11)       NOT NULL AUTO_INCREMENT,
   `name`  VARCHAR(128)  NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id`           INT(11)       NOT NULL AUTO_INCREMENT,
+  `chatID`       BIGINT(20)    NOT NULL DEFAULT 0,
+  `groupID`      INT(11)       NOT NULL DEFAULT 0,
+  `username`     VARCHAR(256)  NOT NULL DEFAULT '',
+  `sub`          BOOLEAN       NOT NULL DEFAULT FALSE,
+  `subTime`      TIME          NOT NULL DEFAULT '08:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

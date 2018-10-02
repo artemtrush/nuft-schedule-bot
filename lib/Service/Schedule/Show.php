@@ -6,15 +6,12 @@ class Show extends \Service\Base
 {
     public function execute(array $params)
     {
-        try {
-            $this->pdo = \Engine\Engine::getConnection('db');
-        } catch (\PDOException $e) {
-            $this->log()->error($e->getMessage());
+        if (!$this->pdo()) {
             return $this->error();
         }
 
-        $group = $this->getGroup($params['chatID']);
-        if (!$group['name'] || !$group['id']) {
+        $group = $this->getUserGroup($params['chatID']);
+        if (empty($group['name']) || empty($group['id'])) {
             return 'Перед тем как искать расписание, нужно отправить мне название группы /group';
         }
 
@@ -45,20 +42,6 @@ class Show extends \Service\Base
 
         $this->setCache($cacheKey, $schedule);
         return $schedule;
-    }
-
-    private function getGroup(int $chatID) {
-        $query = "
-            SELECT `groups`.`name`, `groups`.`id` FROM `groups`
-            INNER JOIN `groupsMap` ON `groups`.`id` = `groupsMap`.`groupID`
-            WHERE `groupsMap`.`chatID` = :chatID
-        ";
-
-        $stmt = $this->pdo->prepare($query);
-        $stmt->bindParam(':chatID', $chatID, \PDO::PARAM_INT);
-        $stmt->execute();
-
-        return $stmt->fetch();
     }
 
     private function treatResponse(string $response) {

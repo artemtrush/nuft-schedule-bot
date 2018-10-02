@@ -21,6 +21,11 @@ class Help extends Base
             '     Пример: /date  01.09.2018  05.09.2018' . PHP_EOL
         ;
 
+
+//@TODOT
+            'sub',
+            'sub_time'
+
         return $help;
     }
 }
