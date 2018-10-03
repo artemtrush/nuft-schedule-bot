@@ -22,10 +22,11 @@ abstract class Base
         }
     }
 
-    protected function getUserGroup(int $chatID) {
+    protected function getUser(int $chatID) {
         $query = "
-            SELECT `groups`.`name`, `groups`.`id` FROM `groups`
-            INNER JOIN `users` ON `groups`.`id` = `users`.`groupID`
+            SELECT `users`.*, `groups`.`name` AS 'groupName'
+            FROM `users`
+            INNER JOIN `groups` ON `users`.`groupID` = `groups`.`id`
             WHERE `users`.`chatID` = :chatID
         ";
 
@@ -119,6 +120,12 @@ abstract class Base
     protected function error()
     {
         return $this->error;
+    }
+
+    protected function userGroupNotFoundError()
+    {
+        //@TODOT
+        return 'Перед тем как , нужно отправить мне название группы /group';
     }
 
     public function validate(array $params) {

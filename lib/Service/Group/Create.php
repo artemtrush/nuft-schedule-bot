@@ -33,7 +33,8 @@ class Create extends \Service\Base
     }
 
     private function setUserData(int $chatID, int $groupID, string $username) {
-        $query = $this->isUserExists($chatID) ? "
+        $user = $this->getUser($chatID);
+        $query = !empty($user['id']) ? "
             UPDATE `users`
             SET `groupID` = :groupID, `username` = :username
             WHERE `chatID` = :chatID
@@ -47,18 +48,5 @@ class Create extends \Service\Base
         $stmt->bindParam(':username', $username, \PDO::PARAM_STR);
         $stmt->bindParam(':chatID',   $chatID,   \PDO::PARAM_INT);
         $stmt->execute();
-    }
-
-    private function isUserExists(int $chatID) {
-        $query = "
-            SELECT `id` from `users`
-            WHERE `chatID` = :chatID
-        ";
-
-        $stmt = $this->pdo()->prepare($query);
-        $stmt->bindParam(':chatID', $chatID, \PDO::PARAM_INT);
-        $stmt->execute();
-
-        return (bool)$stmt->fetchColumn();
     }
 }

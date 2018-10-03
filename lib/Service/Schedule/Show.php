@@ -10,19 +10,19 @@ class Show extends \Service\Base
             return $this->error();
         }
 
-        $group = $this->getUserGroup($params['chatID']);
-        if (empty($group['name']) || empty($group['id'])) {
-            return 'Перед тем как искать расписание, нужно отправить мне название группы /group';
+        $user = $this->getUser($params['chatID']);
+        if (empty($user['groupName']) || empty($user['groupID'])) {
+            return $this->userGroupNotFoundError();
         }
 
-        $cacheKey = 'ServiceScheduleShow__' . $group['id'] . '_' . $params['startDate'] . '_' . $params['endDate'];
+        $cacheKey = 'ServiceScheduleShow__' . $user['groupID'] . '_' . $params['startDate'] . '_' . $params['endDate'];
         $cache = $this->getCache($cacheKey);
         if ($cache) {
             return $cache;
         }
 
         $data = [
-            'group' => iconv('UTF-8', 'Windows-1251', $group['name']),
+            'group' => iconv('UTF-8', 'Windows-1251', $user['groupName']),
             'sdate' => $params['startDate'],
             'edate' => $params['endDate'],
             'faculty' => 0,

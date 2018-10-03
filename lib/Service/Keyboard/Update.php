@@ -1,8 +1,8 @@
 <?php
 
-namespace Service\Subscription;
+namespace Service\Keyboard;
 
-class Create extends \Service\Base
+class Update extends \Service\Base
 {
     public function execute(array $params)
     {
@@ -15,20 +15,20 @@ class Create extends \Service\Base
             return $this->userGroupNotFoundError();
         }
 //@TODOT
-        $this->setUserSubsTime($params['chatID'], $params['subTime']);
-        return '';
+        $this->setUserKeyboard($params['chatID'], $params['keyboard']);
+        return '' . $user['subTime'];
     }
 
-    private function setUserSubsTime(int $chatID, string $subTime) {
+    private function setUserKeyboard(int $chatID, bool $keyboard) {
         $query = "
             UPDATE `users`
-            SET `subTime` = :subTime
+            SET `sub` = :sub
             WHERE `chatID` = :chatID
         ";
 
         $stmt = $this->pdo->prepare($query);
-        $stmt->bindParam(':subTime', $subTime, \PDO::PARAM_STR);
-        $stmt->bindParam(':chatID',  $chatID,  \PDO::PARAM_INT);
+        $stmt->bindParam(':sub',    $subscription, \PDO::PARAM_BOOL);
+        $stmt->bindParam(':chatID', $chatID,       \PDO::PARAM_INT);
         $stmt->execute();
     }
 }

@@ -18,7 +18,7 @@ class Start extends Base
         $creator =  PHP_EOL .
             'Важно! Я все еще нахожусь в режиме тестирования, ' .
             'поэтому советую сначала сравнить найденное мной расписание с официальным.' . PHP_EOL .
-            'По всем вопросам - к создателю: @artemtrush'
+            'По всем вопросам - к создателю: @artemtrush' . PHP_EOL . PHP_EOL
         ;
 
         return $text . $help . $creator;

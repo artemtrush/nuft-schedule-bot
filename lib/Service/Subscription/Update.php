@@ -10,13 +10,13 @@ class Update extends \Service\Base
             return $this->error();
         }
 
-        $group = $this->getUserGroup($params['chatID']);
-        if (empty($group['id'])) {
-            return '';
+        $user = $this->getUser($params['chatID']);
+        if (empty($user['groupID'])) {
+            return $this->userGroupNotFoundError();
         }
-// @TODOT
+//@TODOT
         $this->setUserSubscription($params['chatID'], $params['subscription']);
-        return '';
+        return '' . $user['subTime'];
     }
 
     private function setUserSubscription(int $chatID, bool $subscription) {
